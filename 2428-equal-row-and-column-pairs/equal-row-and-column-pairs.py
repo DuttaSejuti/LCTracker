@@ -11,7 +11,7 @@ class Solution:
             columns.append(temp)
             j += 1
   
-        print(columns)
+        # print(columns)
 
         for g in grids:
             row = g
