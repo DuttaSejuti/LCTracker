@@ -1,6 +1,7 @@
 class Solution:
     def findLeastNumOfUniqueInts(self, arr: List[int], k: int) -> int:
         new_dict = dict()
+        count = 0
 
         for n in arr:
             new_dict[n] = new_dict.get(n, 0) + 1
@@ -10,9 +11,11 @@ class Solution:
         for key in sorted_new_dict:
             if sorted_new_dict[key] <= k:
                 k = k - sorted_new_dict[key]
-                del new_dict[key]
+                # del new_dict[key]
+                count += 1
             else:
                 k = k - sorted_new_dict[key]
                 if k < 0:
                     break
-        return len(new_dict)
+
+        return len(new_dict) - count
