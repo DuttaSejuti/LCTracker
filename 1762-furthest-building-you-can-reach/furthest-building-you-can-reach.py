@@ -2,6 +2,8 @@ class Solution:
     def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
         min_heap = []
 
+        # TC: O(nlogk) k:length of the heap, which is no of ladders
+        # SC: O(k)
         for i in range(len(heights)-1):
             diff = heights[i+1] - heights[i]
             if diff > 0:
