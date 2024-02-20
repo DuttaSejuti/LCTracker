@@ -1,10 +1,19 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
+        # TC:O(n), SCC: O(1)
+        n = len(nums)
+        xor = 0
+        for i in range(1, n+1):
+            xor ^= i
+        for n in nums:
+            xor ^= n
+        return xor
+
         # using math equation for contiguous numbers[0,n]
         # TC: O(n), SC:O(1)
-        n = len(nums)
-        total_sum = n * (n+1) // 2
-        return total_sum - sum(nums)
+        # n = len(nums)
+        # total_sum = n * (n+1) // 2
+        # return total_sum - sum(nums)
 
         #using sorting
         # TC: O(nlogn), SC: O(1)
