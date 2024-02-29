@@ -30,37 +30,83 @@ class Solution:
 
         while(len(queue) > 0):
             n = len(queue)
+            new_list = []
 
             for i in range(n):
                 curr = queue.popleft()
                 val = curr.val
-
-                if val in new_list:
-                    return False
-                new_list.append(val)
                 
                 if curr.left:
                     queue.append(curr.left)
                 if curr.right:
                     queue.append(curr.right)
 
-                if level % 2 == 0 and val % 2 == 0:
-                    return False
-                if level % 2 != 0 and val % 2 != 0:
-                    return False
-                
-                if i == n - 1:
-                    if level % 2 == 0:
-                        if new_list != sorted(new_list):
-                            return False
+                if level % 2 == 0:
+                    if val % 2 == 0:
+                        return False
                     else:
-                        if new_list != sorted(new_list, reverse = True):
-                            return False
-                    new_list = []
+                        if len(new_list) > 0:
+                            if val <= new_list[-1]:
+                                return False
+                        new_list.append(val)
+                
+                if level % 2 != 0:
+                    if val % 2 != 0:
+                        return False
+                    else:
+                        if len(new_list) > 0:
+                            if val >= new_list[-1]:
+                                return False
+                        new_list.append(val)
 
             level += 1
 
         return True
+
+
+
+
+        # queue = deque()
+        # new_list = list()
+
+        # if root:
+        #     queue.append(root)
+        
+        # level = 0
+
+        # while(len(queue) > 0):
+        #     n = len(queue)
+
+        #     for i in range(n):
+        #         curr = queue.popleft()
+        #         val = curr.val
+
+        #         if val in new_list:
+        #             return False
+        #         new_list.append(val)
+                
+        #         if curr.left:
+        #             queue.append(curr.left)
+        #         if curr.right:
+        #             queue.append(curr.right)
+
+        #         if level % 2 == 0 and val % 2 == 0:
+        #             return False
+        #         if level % 2 != 0 and val % 2 != 0:
+        #             return False
+                
+        #         if i == n - 1:
+        #             if level % 2 == 0:
+        #                 if new_list != sorted(new_list):
+        #                     return False
+        #             else:
+        #                 if new_list != sorted(new_list, reverse = True):
+        #                     return False
+        #             new_list = []
+
+        #     level += 1
+
+        # return True
 
 
 
