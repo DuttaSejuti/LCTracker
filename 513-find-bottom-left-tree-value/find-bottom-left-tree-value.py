@@ -13,13 +13,10 @@ class Solution:
         else:
             queue.append(root)
 
-        # queue = deque([root])
         leftmost_val = root.val
 
         while len(queue) > 0:
-            level_size = len(queue)
-
-            for i in range(level_size):
+            for i in range(len(queue)):
                 node = queue.popleft()
 
                 if i == 0:  # The first node at each level
@@ -31,6 +28,7 @@ class Solution:
                     queue.append(node.right)
 
         return leftmost_val
+
     # def findHightestLevel(self, root: Optional[TreeNode]) -> int:
     #     level = 0
     #     queue = deque()
