@@ -14,10 +14,7 @@ class Solution:
         l, r = 0, t_size - 1 # to track lowest and highest tokens
         tokens.sort()
 
-        if(l == r and tokens[l] <= power):
-            return 1
-
-        while(l < r):
+        while(l <= r):
             while(l <= r and tokens[l] <= power):
                 power -= tokens[l]
                 score = score + 1
@@ -29,6 +26,6 @@ class Solution:
                 power += tokens[r]
                 r -= 1
             else:
-                l += 1
+                l += 1 # when tokens[l] > power
 
         return max_score
