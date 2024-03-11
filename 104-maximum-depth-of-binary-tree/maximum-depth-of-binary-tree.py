@@ -11,15 +11,15 @@ class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         # recursive solution DFS
         # TC: O(n), SC: O(n) => recursion stack
-        def dfs(root, level):
-            if not root: return level
-            return max(dfs(root.left, level + 1), dfs(root.right, level + 1))
+        # def dfs(root, level):
+        #     if not root: return level
+        #     return max(dfs(root.left, level + 1), dfs(root.right, level + 1))
         
-        return dfs(root, 0)
+        # return dfs(root, 0)
 
         # recursion solution DFS
-        # if not root: return 0
-        # return max(self.maxDepthroot(root.left), self.maxDepth(root.right)) + 1
+        if not root: return 0
+        return max(self.maxDepth(root.left), self.maxDepth(root.right)) + 1
 
         # iterative solution
         # TC: O(n) => we traverse each node of the tree only once, SC: O(1)
