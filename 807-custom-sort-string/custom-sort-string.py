@@ -1,6 +1,6 @@
 class Solution:
     def customSortString(self, order: str, s: str) -> str:
-        # TC:O(n), SC:O(n)
+        # TC:O(n), SC:O(26) = O(1), as map will only have 26 keys in worst case
         freq_s = dict()
         result = ''
 
