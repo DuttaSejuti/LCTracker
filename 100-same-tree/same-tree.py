@@ -4,19 +4,25 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
+
+# IDEA
+# consider when the trees will not be the same
+# 1) p.val != q.val => return False
+# 2) p.left and !q.left => return False
+# 3) p.right and !q.right => return False
+# 4) !p.left and q.left => return False
+# 5) !p.right and q.right => return False
+# consider p.val == q.vall => traverse(p.left, q.left) and (p.right, q.right)
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        # TC: O(P+Q); P:No of nodes in p, Q:No of nodes in q
-        if not p and not q: #both are null, then consider same tree and return T
+        if not p and not q:
             return True
-        if not p or not q: #any one is null, other has val, not same tree, return F
+        if not p or not q:
             return False
-        if p.val != q.val: #not null, but the val do not match
+        if p.val != q.val:
             return False
         
-        #if the val match, we need to traverse both left and right subtree
         return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
-
         
-
+        
         
