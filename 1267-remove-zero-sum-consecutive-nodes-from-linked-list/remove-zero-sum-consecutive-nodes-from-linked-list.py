@@ -31,11 +31,8 @@ class Solution:
         store_map = dict() # prefix_sum : index
         store_map[0] = -1 # so that if a zero-sum occurs in the array, we would know from where to srart removinf
 
-        result = list()
-        
-        # [2, 2]
-        # i = 2
-        # idx = 0
+        result = array
+    
         for i in range(len(array)):
             prefix_sum += array[i]
             if prefix_sum in store_map:
@@ -44,24 +41,14 @@ class Solution:
             else:
                 store_map[prefix_sum] = i
         return result
-
-    def zero_sum_subarray_exists(self, array: List) -> bool:
-        prefix_sum = 0
-        store_map = dict() # prefix_sum : index
-        store_map[0] = -1 # so that if a zero-sum occurs in the array, we would know from where to srart removinf
-
-        for i in range(len(array)):
-            prefix_sum += array[i]
-            if prefix_sum in store_map:
-                return True
-            else:
-                store_map[prefix_sum] = i
-        return False
         
     def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
         array = self.linked_list_to_array(head)
 
-        while(self.zero_sum_subarray_exists(array)):
-            array = self.remove_zero_sum_subarray_from_array(array)
+        while(1):
+            result_array = self.remove_zero_sum_subarray_from_array(array)
+            if len(result_array) == len(array):
+                break
+            array = result_array
 
         return self.array_to_linked_list(array)
