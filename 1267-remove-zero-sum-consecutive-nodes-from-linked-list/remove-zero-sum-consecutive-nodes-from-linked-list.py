@@ -26,29 +26,26 @@ class Solution:
             curr = curr.next
         return linked_list
 
-    def remove_zero_sum_subarray_from_array(self, array: List) -> List:
+    def remove_zero_sum_subarray_from_array(self, array: List) -> (List, bool):
         prefix_sum = 0
         store_map = dict() # prefix_sum : index
         store_map[0] = -1 # so that if a zero-sum occurs in the array, we would know from where to srart removinf
-
-        result = array
     
         for i in range(len(array)):
             prefix_sum += array[i]
             if prefix_sum in store_map:
                 idx = store_map[prefix_sum]
-                result = array[:idx+1] + array[i+1:]
+                return array[:idx+1] + array[i+1:], 1
             else:
                 store_map[prefix_sum] = i
-        return result
+        return array, 0
         
     def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
         array = self.linked_list_to_array(head)
 
         while(1):
-            result_array = self.remove_zero_sum_subarray_from_array(array)
-            if len(result_array) == len(array):
+            array, sub_array_deleted = self.remove_zero_sum_subarray_from_array(array)
+            if not sub_array_deleted:
                 break
-            array = result_array
 
         return self.array_to_linked_list(array)
