@@ -5,15 +5,43 @@
 
 class Solution:
     def pivotInteger(self, n: int) -> int:
-        # TC: O(n), SC: O(1)
-        sum_from_1 = 0
-        total_sum = n*(n+1) // 2
+        # using maths
+        # TC: O(1), SC:O(1)
+        # total_sum = n*(n+1)//2
+        # pivot = int(math.squt(total_sum))
 
-        for i in range(1, n+1):
-            sum_from_1 += i
-            if sum_from_1 == total_sum - (sum_from_1 - i):
-                return i
-        return -1
+        # if pivot * pivot == total_sum:
+        #     return pivot
+        # else:
+        #     return -1
+
+        # Binary Search
+        # TC: O(logn), SC: O(1)
+        left, right = 1, n
+        total_sum = n*(n+1)//2
+        
+        while left < right:
+            mid = (left+right) // 2
+
+            if mid*mid - total_sum < 0:
+                left = mid + 1
+            else:
+                right = mid
+        
+        if left * left == total_sum:
+            return left
+        else:
+            return -1
+
+        # TC: O(n), SC: O(1)
+        # sum_from_1 = 0
+        # total_sum = n*(n+1) // 2
+
+        # for i in range(1, n+1):
+        #     sum_from_1 += i
+        #     if sum_from_1 == total_sum - (sum_from_1 - i):
+        #         return i
+        # return -1
 
         # TC: O(n), SC: O(n)
         # prefix_sum = [0]
