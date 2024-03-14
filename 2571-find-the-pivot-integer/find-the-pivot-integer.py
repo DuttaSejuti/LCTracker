@@ -20,19 +20,25 @@ class Solution:
         left, right = 1, n
         total_sum = n*(n+1)//2
         
+        if total_sum == 1:
+            return 1
+        
         while left < right:
-            mid = (left+right) // 2
-
-            if mid*mid - total_sum < 0:
-                left = mid + 1
+            mid = (left+right)//2
+            
+            left_sum = mid*(mid+1)//2
+            right_sum = total_sum - ((mid-1)*mid)//2
+            
+            if left_sum == right_sum:
+                return mid
+            
+            elif left_sum < right_sum:
+                left = mid+1
             else:
                 right = mid
-        
-        if left * left == total_sum:
-            return left
-        else:
-            return -1
-
+               
+        return -1
+                
         # TC: O(n), SC: O(1)
         # sum_from_1 = 0
         # total_sum = n*(n+1) // 2
