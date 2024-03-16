@@ -4,12 +4,12 @@ class Solution:
         ps = 0
         prefix_sum = dict()
         prefix_sum_count = dict()
-        # prefix_sum_count[0] = 1
+        prefix_sum_count[0] = 1
         for i in range(len(nums)):
             ps += nums[i]
             prefix_sum[i] = ps
-            if ps == k:
-                count += 1
+            # if ps == k:
+            #     count += 1
 
             known_variable = (prefix_sum[i] - k) 
             
