@@ -1,8 +1,5 @@
 class Solution:
     def getNextSequence(self, n: str) -> str:
-        if n == '':
-            return '1'
-
         count = 1
         res = ''
 
@@ -20,11 +17,15 @@ class Solution:
         return res
 
     def countAndSay(self, n: int) -> str:
-        res = ''
-
-        for i in range(n):
-            res = self.getNextSequence(res)
+        if n == 1:
+            return '1'
+        return self.getNextSequence(self.countAndSay(n-1))
         
-        return res
+        # alternative of recursion
+        # for i in range(n):
+        #     res = self.getNextSequence(res)
+        
+        # return res
+        
 
-    
+            
