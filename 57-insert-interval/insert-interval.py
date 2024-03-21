@@ -1,7 +1,3 @@
-# IDEA
-# Possible cases:
-
-
 class Solution:
     # check if the two interval overlaps or not and build a array of 0 and 1
     def checkOverlap(self, currentInt: List[int], newInt: List[int]) -> int:
@@ -38,7 +34,6 @@ class Solution:
         modifiedIntervals.append([math.inf, math.inf])
 
         for i in range(1, len(modifiedIntervals)):
-            print("haha")
             prev = modifiedIntervals[i-1]
             curr = modifiedIntervals[i]
 
@@ -52,7 +47,8 @@ class Solution:
 
     def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
         checkOverlapList = list()
-        mergeInterval = 0
+        # a flag to determine if there is an overlap between the intervals and the newInterval or not
+        mergeInterval = 0 
 
         # construct the list to check where is the overlap occurs [0,1,1,1,0] or [0,0,0,0]
         for i in range(len(intervals)):
