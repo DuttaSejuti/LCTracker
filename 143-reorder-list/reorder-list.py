@@ -28,9 +28,7 @@ class Solution:
         # print("mid", mid)
         return prev
     
-    def merge(self, head: Optional[ListNode], reversedSecondHalf: Optional[ListNode]) ->  Optional[ListNode]:
-        list1, list2 = head, reversedSecondHalf
-
+    def merge(self, list1: Optional[ListNode], list2: Optional[ListNode]) ->  Optional[ListNode]:
         while list2:
             next_list1 = list1.next
             next_list2 = list2.next
