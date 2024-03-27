@@ -8,7 +8,6 @@ class Solution:
             if nums[i] <= 0 or nums[i] > size:
                 nums[i] = size + 1
         
-        print(nums)
         for i in range(size):
             val = abs(nums[i])
             if 1 <= val <= size: # check valid index
@@ -16,9 +15,8 @@ class Solution:
                 if nums[index] > 0: # if positive val
                     nums[index] = - nums[index]
         
-        print(nums)
         for i in range(1, size+1):
-            if nums[i-1] >= 0:
+            if nums[i-1] > 0: # checks i=1 present in the array or not, >=0 means positive; not present
                 return i
         return size+1
 
