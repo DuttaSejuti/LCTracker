@@ -1,4 +1,5 @@
 class Solution:
+    # TC: O(n), SC: O(1)
     def numSubarrayProductLessThanK(self, nums: List[int], k: int) -> int:
         count = 0
         l, r = 0, 0
@@ -6,12 +7,11 @@ class Solution:
 
         for r in range(len(nums)):
             multi *= nums[r]
-            while l < r and multi >= k:
-                multi = multi / nums[l]
+            while l <= r and multi >= k: # condition for failing; if l passes r and multi >= k
+                multi = multi // nums[l]
                 l += 1
 
-            if multi < k:
-                count += (r-l+1)
+            count += (r-l+1) # no of subarrays ending at r; # of subarrays in the window
 
         return count
 
