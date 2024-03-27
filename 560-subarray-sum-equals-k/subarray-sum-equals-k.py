@@ -2,16 +2,16 @@ class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
         count = 0
         ps = 0
-        prefix_sum = dict()
+        # prefix_sum = dict()
         prefix_sum_count = dict()
         prefix_sum_count[0] = 1
         for i in range(len(nums)):
             ps += nums[i]
-            prefix_sum[i] = ps
+            # prefix_sum[i] = ps
             # if ps == k:
             #     count += 1
 
-            known_variable = (prefix_sum[i] - k) 
+            known_variable = (ps - k) 
             
             count += prefix_sum_count.get(known_variable, 0)
 
