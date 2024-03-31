@@ -38,20 +38,28 @@ class Solution:
             l = r
         return new_list
 
-    def countSubarraysWhereMaxExists(self, valid_list: List[int], k: int, boundary: int) -> int:
-        valid_lists = self.breakdownList(valid_list, boundary + 1, k)
+    def countSubarraysWhereTargetExists(self, valid_list: List[int], target: int, left_boundary: int, right_boundary: int) -> int:
+        valid_lists = self.breakdownList(valid_list, left_boundary, right_boundary)
 
         count = 0
         for valid_list in valid_lists:
-            count += self.countSubarraysWhereTargetExistsAtLeastKTimes(valid_list, 1, k)
+            count += self.countSubarraysWhereTargetExistsAtLeastKTimes(valid_list, 1, target)
+        return count
+
+    def countSubarraysWhereMaxExists(self, valid_list: List[int], target: int, boundary: int) -> int:
+        valid_lists = self.breakdownList(valid_list, boundary + 1, target)
+
+        count = 0
+        for valid_list in valid_lists:
+            count += self.countSubarraysWhereTargetExistsAtLeastKTimes(valid_list, 1, target)
         return count
     
-    def countSubarraysWhereMinExists(self, valid_list: List[int], k: int, boundary: int) -> int:
-        valid_lists = self.breakdownList(valid_list, k, boundary - 1)
+    def countSubarraysWhereMinExists(self, valid_list: List[int], target: int, boundary: int) -> int:
+        valid_lists = self.breakdownList(valid_list, target, boundary - 1)
 
         count = 0
         for valid_list in valid_lists:
-            count += self.countSubarraysWhereTargetExistsAtLeastKTimes(valid_list, 1, k)
+            count += self.countSubarraysWhereTargetExistsAtLeastKTimes(valid_list, 1, target)
         return count
     
     def countSubarrayWhereNoneExists(self, valid_list: List[int], minK: int, maxK: int) -> int:
@@ -68,8 +76,13 @@ class Solution:
         length = len(valid_list)
         total_subarray = (length * (length + 1)) // 2
 
-        max_exists = self.countSubarraysWhereMaxExists(valid_list, maxK, minK)
-        min_exists = self.countSubarraysWhereMinExists(valid_list, minK, maxK)
+        # max_exists = self.countSubarraysWhereMaxExists(valid_list, maxK, minK)
+        # min_exists = self.countSubarraysWhereMinExists(valid_list, minK, maxK)
+
+        max_exists = self.countSubarraysWhereTargetExists(valid_list, maxK, minK + 1, maxK)
+        min_exists = self.countSubarraysWhereTargetExists(valid_list, minK, minK, maxK - 1)
+
+
         none_exists = self.countSubarrayWhereNoneExists(valid_list, minK, maxK)
 
         # print(max_exists, min_exists, none_exists)
