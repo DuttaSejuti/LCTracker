@@ -38,6 +38,8 @@ class Solution:
             l = r
         return new_list
 
+    # Generalized function of the underlying 2 functions
+    # It returns count of all subarrays where a target exists between a range
     def countSubarraysWhereTargetExists(self, valid_list: List[int], target: int, left_boundary: int, right_boundary: int) -> int:
         valid_lists = self.breakdownList(valid_list, left_boundary, right_boundary)
 
@@ -76,11 +78,12 @@ class Solution:
         length = len(valid_list)
         total_subarray = (length * (length + 1)) // 2
 
-        # max_exists = self.countSubarraysWhereMaxExists(valid_list, maxK, minK)
-        # min_exists = self.countSubarraysWhereMinExists(valid_list, minK, maxK)
+        max_exists = self.countSubarraysWhereMaxExists(valid_list, maxK, minK)
+        min_exists = self.countSubarraysWhereMinExists(valid_list, minK, maxK)
 
-        max_exists = self.countSubarraysWhereTargetExists(valid_list, maxK, minK + 1, maxK)
-        min_exists = self.countSubarraysWhereTargetExists(valid_list, minK, minK, maxK - 1)
+        # This is just calling the generalized function with the boundaries in the parameter
+        # max_exists = self.countSubarraysWhereTargetExists(valid_list, maxK, minK + 1, maxK)
+        # min_exists = self.countSubarraysWhereTargetExists(valid_list, minK, minK, maxK - 1)
 
 
         none_exists = self.countSubarrayWhereNoneExists(valid_list, minK, maxK)
