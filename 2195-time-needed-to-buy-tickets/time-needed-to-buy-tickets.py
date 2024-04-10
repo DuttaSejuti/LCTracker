@@ -1,29 +1,29 @@
 class Solution:
     #Approach-01
     # TC:O(n*m)=> m is the max no of tickets at each index, SC:O(n) => for the deque
-    def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
-        time = 0
-        queue = deque()
+    # def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
+    #     time = 0
+    #     queue = deque()
 
-        #initialize the queue with indices of the tickets
-        for i in range(len(tickets)):
-            queue.append(i)
+    #     # initialize the queue with indices of the tickets
+    #     for i in range(len(tickets)):
+    #         queue.append(i)
         
-        while len(queue) > 0:
-            time += 1 #increment time for each iteration
+    #     while len(queue) > 0:
+    #         time += 1 #increment time for each iteration
 
-            front = queue.popleft() # get the front of the queue
-            tickets[front] -= 1 # buy ticket for the front person
+    #         front = queue.popleft() # get the front idx of the queue
+    #         tickets[front] -= 1 # buy ticket for the front person
 
-            # if k has bought all the tickets, return
-            if front == k and tickets[front] == 0:
-                return time
+    #         # if k has bought all the tickets, return
+    #         if front == k and tickets[front] == 0:
+    #             return time
             
-            # push the front person at the end of the queue, so he can buy again later
-            if tickets[front] != 0:
-                queue.append(front)
+    #         # push the front person at the end of the queue, so he can buy again later
+    #         if tickets[front] != 0:
+    #             queue.append(front)
             
-        return time
+    #     return time
 
 
     # Approach-02
@@ -68,3 +68,19 @@ class Solution:
     #             time += min(tickets[k], tickets[i])
             
     #     return time
+
+    # Approach-04
+    def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
+        ticket = tickets[k]
+        time = 0
+        for i in range(len(tickets)):
+            curr = tickets[i]
+            if curr < ticket:
+                time += curr
+            else:
+                if i <= k:
+                    time += ticket
+                else:
+                    time += ticket-1
+        
+        return time
