@@ -1,23 +1,39 @@
 class Solution:
+    def computation(self, n: int, dp: dict) -> int:
+        if n in dp:
+            res = dp[n]
+            return res
+
+        if n == 0:
+            return 0
+        elif n == 1 or n == 2:
+            return 1
+        else:
+            res = self.computation(n-1, dp) + self.computation(n-2, dp) + self.computation(n-3, dp)
+            dp[n] = res
+
+        return res
+
     def tribonacci(self, n: int) -> int:
         dp = {}
 
-        def computation(n: int) -> int:
-            if n in dp:
-                res = dp[n]
-                return res
+        # def computation(n: int) -> int:
+        #     if n in dp:
+        #         res = dp[n]
+        #         return res
 
-            if n == 0:
-                return 0
-            elif n == 1 or n == 2:
-                return 1
-            else:
-                res = computation(n-1) + computation(n-2) + computation(n-3)
-                dp[n] = res
+        #     if n == 0:
+        #         return 0
+        #     elif n == 1 or n == 2:
+        #         return 1
+        #     else:
+        #         res = computation(n-1) + computation(n-2) + computation(n-3)
+        #         dp[n] = res
 
-            return res
+        #     return res
 
-        return computation(n)
+        # return computation(n)
+        return self.computation(n, dp)
 
 
     # TLE
