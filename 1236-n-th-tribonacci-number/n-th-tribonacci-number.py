@@ -19,12 +19,7 @@ class Solution:
     def tribonacci(self, n: int) -> int:
         f = self.createFibonacciOf38()
 
-        for i in range(len(f)):
-            if i == 0:
-                f[i] = 0
-            elif i == 1 or i == 2:
-                f[i] = 1
-            else:
-                f[i] = f[i-3] + f[i-2] + f[i-1]
+        for i in range(3, len(f)):
+            f[i] = f[i-3] + f[i-2] + f[i-1]
         
         return f[n]
