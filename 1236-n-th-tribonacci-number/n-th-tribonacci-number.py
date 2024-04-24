@@ -1,21 +1,33 @@
 class Solution:
+    def computation(self, n: int, dp: list) -> int:
+        if n in dp:
+            res = dp[n]
+
+        if n == 0:
+            return 0
+        elif n == 1 or n == 2:
+            return 1
+        else:
+            res = computation(n-1) + computation(n-2) + computation(n-3)
+            dp[n] = res
+
+        return res
+
+    def tribonacci(self, n: int) -> int:
+        dp = [0]*38
+
+        return self.computation(n, dp)
+
+    # TLE
     # def tribonacci(self, n: int) -> int:
-    #     dp = [-1] * 38
     #     if n == 0:
     #         return 0
     #     if n == 1 or n == 2:
     #         return 1
         
-    #     return tribonacci(n-1) + tribonacci(n-2) + tribonacci(n-3)
+    #     return self.tribonacci(n-1) + self.tribonacci(n-2) + self.tribonacci(n-3)
 
-    # def createFibonacciOf38(self)-> List:
-    #     f = [0 , 1]
-
-    #     for i in range(2, 38):
-    #         f.append(f[i-1] + f[i-2])
-        
-    #     return f
-
+    # got AC
     def tribonacci(self, n: int) -> int:
         f = [0, 1, 1]
 
