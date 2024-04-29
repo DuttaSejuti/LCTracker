@@ -1,4 +1,7 @@
 class Solution:
+    # pre-compute no of 1's in each row and each column
+    # traverse the grid, if the cell is '1', remove this 1 from both row and column computation of result
+    # the no of right_triangle is the no_of_1_row * no_of_1_col
     def numberOfRightTriangles(self, grid: List[List[int]]) -> int:
         r, c = len(grid), len(grid[0])
         result = 0
