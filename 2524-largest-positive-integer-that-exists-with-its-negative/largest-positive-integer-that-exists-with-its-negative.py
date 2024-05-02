@@ -1,4 +1,7 @@
 class Solution:
+    # store all the elements in a dictionary
+    # for all the keys, if the opposite key exists in the dict, calculate the max
+    # TC: O(n), SC:O(n)
     def findMaxK(self, nums: List[int]) -> int:
         new_dict = dict()
         max_ele = -1
