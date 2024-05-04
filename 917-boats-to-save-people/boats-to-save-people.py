@@ -4,9 +4,10 @@ class Solution:
         l, r = 0, len(people) - 1
         people.sort()
 
-        while l <= r:
-            if l == r:
+        while l < r:
+            if people[r] == limit:
                 r -= 1
+                boat += 1
             else:
                 s = people[l] + people[r]
                 if s <= limit:
@@ -14,6 +15,8 @@ class Solution:
                     r -= 1
                 else:
                     r -= 1
-            boat += 1
+                boat += 1
+            if l == r and people[r] <= limit:
+                boat += 1
 
         return boat
