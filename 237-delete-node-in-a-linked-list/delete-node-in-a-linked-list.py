@@ -13,10 +13,8 @@
 
 class Solution:
     def deleteNode(self, node):
-        next_node = node.next 
-        node.val = next_node.val
+        node.val = node.next.val
         node.next = node.next.next
-        node
 
         """
         :type node: ListNode
