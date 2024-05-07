@@ -4,56 +4,40 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def get_number_from_ll_as_list(self, head: Optional[ListNode]) -> List:
-        new_list = []
+    def reverse(self, head: Optional[ListNode]) -> Optional[ListNode]:
         curr = head
+        prev = None
 
         while curr:
-            new_list.append(curr.val)
-            curr = curr.next
+            next_node = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_node
         
-        return new_list
-    
-    def convert_list_to_number(self, nums: List) -> int:
-        num = 0
-
-        for digit in nums:
-            num = num*10 + digit
-        
-        return num
-    
-    def double_the_number(self, num: str) -> int:
-
-        return num*2
-    
-    def convert_num_to_list(self, num: int) -> List:
-        if num == 0:
-            return [0]
-
-        new_list = []
-
-        while num > 0:
-            digit = num%10
-            new_list.insert(0, digit)
-            num = num//10
-        
-        return new_list
-    
-    def convert_list_to_ll(self, num: list) -> Optional[ListNode]:
-        res_head = ListNode()
-        res_tail = res_head
-
-        for n in num:
-            res_tail.next = ListNode(n)
-            res_tail = res_tail.next
-        
-        return res_head.next
+        return prev
 
     def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        num = self.get_number_from_ll_as_list(head)
-        num = self.convert_list_to_number(num)
-        res_num = self.double_the_number(num)
-        res_list = self.convert_num_to_list(res_num)
-        res = self.convert_list_to_ll(res_list)
+        head = self.reverse(head)
+        curr = head
+        # we need this prev var/node, becasue if after doubling the last_node of the reversed ll we still have a carry = 1
+        # we need to add this 1 as a new_node
+        prev = None
+        carry = 0
 
-        return res
+        while curr:
+            val = curr.val * 2 + carry
+            curr.val = val % 10
+            
+            # carry can not be more than 1, because the node.val will be in range 0 to 9
+            if val > 9:
+                carry = 1
+            else:
+                carry = 0
+            
+            prev = curr
+            curr = curr.next
+        
+        if carry:
+            prev.next = ListNode(carry)
+
+        return self.reverse(head)
