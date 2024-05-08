@@ -6,68 +6,100 @@
 
 # solution with recursion (without reversing)
 # TC:O(n), SC:O(n)
-class Solution:
-    def doubleUtility(self, curr: Optional[ListNode]) -> int:
-        if curr is None:
-            return 0
+# class Solution:
+#     def doubleUtility(self, curr: Optional[ListNode]) -> int:
+#         if curr is None:
+#             return 0
         
-        carry = self.doubleUtility(curr.next)
-        new_val = curr.val * 2 + carry
-        curr.val = new_val % 10
+#         carry = self.doubleUtility(curr.next)
+#         new_val = curr.val * 2 + carry
+#         curr.val = new_val % 10
 
-        if new_val >= 10:
-            carry = 1
-        else:
-            carry = 0
+#         if new_val >= 10:
+#             carry = 1
+#         else:
+#             carry = 0
 
-        return carry
+#         return carry
 
-    def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        lastCarry = self.doubleUtility(head)
+#     def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         lastCarry = self.doubleUtility(head)
 
-        if lastCarry:
-            newHead = ListNode(lastCarry)
-            newHead.next = head
-            return newHead
+#         if lastCarry:
+#             newHead = ListNode(lastCarry)
+#             newHead.next = head
+#             return newHead
         
-        return head
+#         return head
 
 # solution by reversing => TC:O(n), SC:O(1) 
 # class Solution:
-    # def reverse(self, head: Optional[ListNode]) -> Optional[ListNode]:
-    #     curr = head
-    #     prev = None
+#     def reverse(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         curr = head
+#         prev = None
 
-    #     while curr:
-    #         next_node = curr.next
-    #         curr.next = prev
-    #         prev = curr
-    #         curr = next_node
+#         while curr:
+#             next_node = curr.next
+#             curr.next = prev
+#             prev = curr
+#             curr = next_node
         
-    #     return prev
+#         return prev
 
-    # def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
-    #     head = self.reverse(head)
-    #     curr = head
-    #     # we need this prev var/node, becasue if after doubling the last_node of the reversed ll we still have a carry = 1
-    #     # we need to add this 1 as a new_node
-    #     prev = None
-    #     carry = 0
+#     def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+#         head = self.reverse(head)
+#         curr = head
+#         # we need this prev var/node, becasue if after doubling the last_node of the reversed ll we still have a carry = 1
+#         # we need to add this 1 as a new_node
+#         prev = None
+#         carry = 0
 
-    #     while curr:
-    #         val = curr.val * 2 + carry
-    #         curr.val = val % 10
+#         while curr:
+#             val = curr.val * 2 + carry
+#             curr.val = val % 10
             
-    #         # carry can not be more than 1, because the node.val will be in range 0 to 9
-    #         if val > 9:
-    #             carry = 1
-    #         else:
-    #             carry = 0
+#             # carry can not be more than 1, because the node.val will be in range 0 to 9
+#             if val > 9:
+#                 carry = 1
+#             else:
+#                 carry = 0
             
-    #         prev = curr
-    #         curr = curr.next
+#             prev = curr
+#             curr = curr.next
         
-    #     if carry:
-    #         prev.next = ListNode(carry)
+#         if carry:
+#             prev.next = ListNode(carry)
 
-    #     return self.reverse(head)
+#         return self.reverse(head)
+
+class Solution:
+    def reverse(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        curr = head
+        prev = None
+
+        while curr:
+            next_node = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next_node
+        
+        return prev
+
+    def doubleIt(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        head = self.reverse(head)
+        curr = head
+        carry = 0
+
+        while curr:
+            val = curr.val * 2 + carry
+            curr.val = val % 10
+            carry = val//10
+
+            if curr.next is None and carry:
+                curr.next = ListNode(carry)
+                break
+
+            curr = curr.next
+
+        return self.reverse(head)
+
