@@ -1,17 +1,25 @@
 class Solution:
     def findRelativeRanks(self, scores: List[int]) -> List[str]:
-        ranked_scores = sorted(scores, reverse = True)
-        result = []
+        score_idx = dict()
 
-        for score in scores:
-            idx = ranked_scores.index(score)
-            if idx == 0:
-                result.append('Gold Medal')
-            elif idx == 1:
-                result.append('Silver Medal')
-            elif idx == 2:
-                result.append('Bronze Medal')
+        for i in range(len(scores)):
+            score_idx[scores[i]] = i
+
+        scores.sort(reverse=True)
+        result = ['']*len(scores)
+
+        for i in range(len(scores)):
+            # this uses O(n) to find the idx, use dictionary to access the idx in O(1)
+            # idx = ranked_scores.index(score)
+
+            idx = score_idx[scores[i]]
+            if i == 0:
+                result[idx] = 'Gold Medal'
+            elif i == 1:
+                result[idx] = 'Silver Medal'
+            elif i == 2:
+                result[idx] = 'Bronze Medal'
             else:
-                result.append(str(idx+1))
+                result[idx] = str(i+1)
             
         return result
