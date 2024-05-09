@@ -10,9 +10,6 @@ class Solution:
         for h in happiness:
             heapq.heappush(heap, -h)
         
-        # as our target is to pick the largest, the first top value will always be picked at first turn
-        max_sum_happiness += - (heapq.heappop(heap))
-        k -= 1
 
         # till we have k and heap, simulate
         while k > 0 and heap:
