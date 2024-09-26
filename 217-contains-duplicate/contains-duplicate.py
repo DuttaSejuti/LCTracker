@@ -1,29 +1,19 @@
+# TC: O(n^2), SC: O(1) => TLE
+# class Solution:
+#     def containsDuplicate(self, nums: List[int]) -> bool:
+#         for i in range(len(nums)):
+#             for j in range(i+1, len(nums)):
+#                 if nums[i] == nums[j]:
+#                     return True
+#         return False
+
+# TC: O(n), SC:O(n)
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
-        # iii
-        hashSet = set()
-        for n in nums:
-            if n in hashSet:
+        new_dict = dict()
+        for num in nums:
+            new_dict[num] = new_dict.get(num, 0) + 1
+            if new_dict[num] > 1:
                 return True
-            hashSet.add(n)
         return False
 
-        # ii
-        # new_dict = dict()
-        # for element in nums:
-        #     #None means the dict does not have the key now, if the value != None
-        #     # this means we already have this key in the dict
-        #     if new_dict.get(element) != None:
-        #         return True
-        #     else:
-        #         new_dict[element] = 1
-        # return False
-
-        # i
-        # new_dict = dict()
-        # for element in nums:
-        #     new_dict[element] = new_dict.get(element, 0) + 1
-        # for v in new_dict.values():
-        #     if v > 1:
-        #         return True
-        # return False
