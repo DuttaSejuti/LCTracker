@@ -10,10 +10,18 @@
 # TC: O(n), SC:O(n)
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
-        new_dict = dict()
-        for num in nums:
-            new_dict[num] = new_dict.get(num, 0) + 1
-            if new_dict[num] > 1:
+        hashset = set()
+
+        for n in nums:
+            if n in hashset:
                 return True
+            hashset.add(n)
         return False
+    
+        # new_dict = dict()
+        # for num in nums:
+        #     new_dict[num] = new_dict.get(num, 0) + 1
+        #     if new_dict[num] > 1:
+        #         return True
+        # return False
 
