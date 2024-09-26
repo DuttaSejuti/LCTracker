@@ -5,9 +5,11 @@ class Solution:
         mid = 0
 
         # we need to check equal l<=r, because there can be only one element [5] and target is 5
-        # then l and l are same, without equal, this will return -1, will not go insode the loop
+        # then l and r are same, without equal, this will return -1, will not go insode the loop
+        # l < r -> there are duplicate elements
+        # l <= r -> all the elements are unique
         while l <= r:
-            mid = (l+r) // 2
+            mid = (l+r) // 2 # mid = l + ((r - l) // 2 because sometimes the other can overflow
             if nums[mid] < target:
                 l = mid + 1
             elif nums[mid] > target:
@@ -18,9 +20,7 @@ class Solution:
 
     # TC:O(n), SC:O(n)
     # def search(self, nums: List[int], target: int) -> int:
-    #     new_dict = dict()
     #     for i in range(len(nums)):
-    #         new_dict[nums[i]] = i
     #         if nums[i] == target:
     #             return i
     #     return -1
