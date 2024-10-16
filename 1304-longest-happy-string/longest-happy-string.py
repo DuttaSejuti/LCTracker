@@ -10,15 +10,11 @@ class Solution:
             max_val, char = heapq.heappop(max_heap)
             max_val = - max_val
             if char != last_char:
-                if max_val >= 2:
-                    ans += char * 2
-                    max_val -= 2
-                else:
-                    ans += char * 1
-                    max_val -= 1
+                char_cnt = min(max_val, 2)
+                ans += char * char_cnt
+                max_val -= char_cnt
+
                 last_char = char
-                if max_val > 0:
-                    heapq.heappush(max_heap, (-max_val, char))
             else:
                 if not max_heap:
                     break
@@ -29,6 +25,7 @@ class Solution:
                 last_char = second_char
                 if second_max_val > 0:
                     heapq.heappush(max_heap, (-second_max_val, second_char))
+            if max_val > 0:
                 heapq.heappush(max_heap, (-max_val, char))
         
         return ans
