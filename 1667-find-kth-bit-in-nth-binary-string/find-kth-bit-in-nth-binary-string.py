@@ -15,6 +15,17 @@ class Solution:
 
         return s + "1" + self.invertNum(s)[::-1]
 
-
     def findKthBit(self, n: int, k: int) -> str:
         return self.nthBinaryString(n)[k-1]
+
+
+    # def findKthBit(self, n: int, k: int) -> str:
+    #     num = "0"
+    #     if n == 1: return num
+
+    #     for i in range(n-1):
+    #         tmp = num
+    #         num += "1"
+    #         num += self.invertNum(tmp)[::-1]
+        
+    #     return num[k-1]
