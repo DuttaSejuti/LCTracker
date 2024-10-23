@@ -5,7 +5,7 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def replaceValueInTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+    def generateLevelSum(self, root: Optional[TreeNode]) -> List[int]:
         levelSums = []
         queue = deque()
 
@@ -20,16 +20,21 @@ class Solution:
                 level_sum += curr.val
                 if curr.left: queue.append(curr.left)
                 if curr.right: queue.append(curr.right)
-            # if level == 0 or level == 1:
-            #     levelSums.append(0)
-            # else:
             levelSums.append(level_sum)
             level += 1
-        levelSums.append(0)
+
+        return levelSums
+
+    def replaceValueInTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        levelSums = self.generateLevelSum(root)
+
+        levelSums.append(0) # as we are accessing level 2's sum in level 1,
+        # we need to append a dummy 0 to avoid out of bound error
+
         # traversing tree to replace the node value to it's cousins
-        root.val = 0
+        queue = deque()
+        root.val = 0 # at level 0, root will always be 0, as it does not have any sibling, hence no cousin
         queue.append(root) # least node size is 1, no need to check not root
-        # print(levelSums)
         
         level = 0
         while len(queue) > 0:
