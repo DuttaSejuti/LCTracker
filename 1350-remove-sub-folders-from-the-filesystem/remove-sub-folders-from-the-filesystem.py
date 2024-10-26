@@ -8,11 +8,13 @@ class TrieNode:
         # as the string starts with /, this will create an empty string for the first /, hence string[1:]
         folder = path[1:].split('/')
         for c in folder:
+            if curr.end_of_folder:
+                return False
             if c not in curr.children:
                 curr.children[c] = TrieNode()
             curr = curr.children[c]
-            if curr.end_of_folder:
-                return False
+            # if curr.end_of_folder:
+            #     return False
         curr.end_of_folder = True
         return True
 
