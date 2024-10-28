@@ -1,8 +1,7 @@
 class Solution:
     def longestSquareStreak(self, nums: List[int]) -> int:
-        # nums.sort(reverse = True)
         freq = dict()
-        result = []
+        result = [0]
         min_value = 1.00001
     
         for n in nums:
@@ -11,18 +10,30 @@ class Solution:
         for n in nums:
             temp = set()
             while n > min_value:
-                # print("N", n)
                 s = math.sqrt(n)
-                # print("S", s)
                 if freq.get(s, 0) != 0 and freq.get(n, 0) != 0: # exists in the nums
-                    if n not in temp:
                         temp.add(n)
-                    if s not in temp:
                         temp.add(s)
                 n = math.sqrt(n)
-                # print(temp)
-            # print(temp)
             if len(temp) > 1:
-                result.append(len(temp))
+                max_len = max(result[-1], len(temp))
+                result.append(max_len)
 
-        return max(result) if len(result) > 0 else -1
+        return result[-1] if result[-1] != 0 else -1
+
+# class Solution:
+#     def longestSquareStreak(self, nums: List[int]) -> int:
+#         longestStreak = 0
+#         nums = set(nums) # we can access in set in O(1) times
+
+#         for n in nums:
+#             currentStreak = 0
+#             square_root = n
+#             while square_root in nums:
+#                 currentStreak += 1
+#                 if square_root * square_root > 10**5:
+#                     break
+#                 square_root *= square_root
+#             longestStreak = max(longestStreak, currentStreak)
+#         return longestStreak if longestStreak >= 2 else -1
+
