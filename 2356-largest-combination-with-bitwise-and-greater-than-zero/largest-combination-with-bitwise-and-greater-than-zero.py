@@ -1,4 +1,4 @@
-# TC: O(n), SC: O(n)
+# TC: O(n), SC: O(n) => O(24) => O(1)
 # we will filter out the numbers from the candidates, that have '1' in the same bit position
 class Solution:
     def getLength(self, candidates: List[int], bit_pos: int) -> int:
