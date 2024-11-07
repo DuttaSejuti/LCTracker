@@ -1,10 +1,12 @@
 # TC: O(n), SC: O(n)
-# we will filter out the numbers from the candidates, that have 
+# we will filter out the numbers from the candidates, that have '1' in the same bit position
 class Solution:
     def getLength(self, candidates: List[int], bit_pos: int) -> int:
-        bit_mask = 1 << bit_pos # for bit pos 0, bit_mask will be .....001; 1 at position 0
+        # for bit pos 0, bit_mask will be 1 << 0 => .....001; 1 at position 0
+        # bit_pos = 2; bit_mask = 1 << 2 => binary 0100 => decimal 4
+        bit_mask = 1 << bit_pos 
 
-        # we filter the numbers in candidates that has '1' at bit pos "bit_pos"
+        # we filter the numbers in candidates that has '1' at a target position 'bit_pos'
         filtered_subset = [num for num in candidates if num & bit_mask]
 
         return len(filtered_subset)
