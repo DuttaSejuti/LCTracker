@@ -15,10 +15,13 @@ class Solution:
         for n in nums:
             xor_nums ^= n  
 
+        # it is guranteed that the maximized xor will be 2^(maximumBit) - 1
+        # because of "0 <= nums[i] < 2^maximumBit" this constraint
+        # creates a binary number with exactly k bits sets to '1'
+        max_possible_xor = (1 << maximumBit) - 1
+
         for _ in range(length):
-            # creates a binary number with exactly k bits sets to '1'
-            mask = (1 << maximumBit) - 1
-            max_k = xor_nums ^ mask
+            max_k = xor_nums ^ max_possible_xor
             result.append(max_k)
             last_val = nums.pop()
             # update xor_nums by performing xor with the popped element and the previous xor
