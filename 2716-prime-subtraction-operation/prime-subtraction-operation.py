@@ -35,7 +35,7 @@ class Solution:
                 return False
         return True
 
-    # TC: O(n) + O(n * p * p) + O(n)
+    # TC: O(n^2) + O(n * p) + O(n)
     def primeSubOperation(self, nums: List[int]) -> bool:
         prime_list = self.createPrimeList()
         l = len(nums)
