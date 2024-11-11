@@ -5,18 +5,15 @@
 # 4. after traversing and performing the operation the updated array need to be checked if it's sorted or not 
 class Solution:
     def createPrimeList(self) -> List[int]:
-        flag = 0
-        primes = [2]
-        for num in range(3, 1000):
+        primes = []
+        for num in range(2, 1000):
+            flag = 1
             for i in range(2, num):
                 if num % i == 0:
                     flag = 0
                     break
-                if i == num - 1 and flag == 0:
-                    flag = 1
             if flag == 1:
                 primes.append(num)
-            flag = 0
         
         return primes
     
