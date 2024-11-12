@@ -18,21 +18,21 @@ class Solution:
         result = [0]*len(queries)
         # this query_beauty will store the maximum beauty possible for a query, so that we do not need to
         # revisit the same item twice
-        query_beauty = list()
+        # query_beauty = list()
         i = 0
         max_beauty = 0
 
         # O(n+m) => each query and item is traversed only once
         for query in query_list:
-            if len(query_beauty) > 0:
-                max_beauty = query_beauty[-1] # the last max_beauty encountered so far 
+            # if len(query_beauty) > 0:
+            #     max_beauty = query_beauty[-1] # the last max_beauty encountered so far 
             while i < len(items):
                 if items[i][0] > query[0]:
                     break
                 max_beauty = max(max_beauty, items[i][1])
                 i += 1
             result[query[1]] = max_beauty # placing the result maintaing the order of queries
-            query_beauty.append(max_beauty)
+            # query_beauty.append(max_beauty)
 
         return result
                 
