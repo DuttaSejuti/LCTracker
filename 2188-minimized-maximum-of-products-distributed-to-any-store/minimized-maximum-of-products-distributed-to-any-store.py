@@ -1,6 +1,8 @@
 # we need to keep checking with all possible distributions from 1 to the max
+# we are checking the results in sorted order, 1, 2, 3, 4, 4 => Binary Search
+# TC: O(nlog(maxValue))
 class Solution:
-    def canDistribute(self, n: int, max_value: int, quantities: List[int]) -> int:
+    def canDistribute(self, n: int, max_value: int, quantities: List[int]) -> bool:
         stores = 0
         for quantity in quantities:
             stores += ceil(quantity/max_value)
