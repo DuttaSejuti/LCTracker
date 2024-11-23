@@ -4,32 +4,38 @@
 #   i) count the no of stones, if get a obstacle, the stones till now encountered will be upon the obstacle
 #  ii) if we reach the end and there is still stones count, this means we did not encounter any obstable in the path,
 #     the stones will go to the bottom
+
+# TC: O(M*N) => even though we have a while loop inside a nested loop, the values are only processed once.
+# its total work is bounded by n
 class Solution:
     def rotateTheBox(self, box: List[List[str]]) -> List[List[str]]:
-        gem_dict = dict()
+        gem_count = 0
         new_box = [] # modified rows
 
         # modifying the rows
         for row in box:
             new_row = ['.']*len(row)
             for i in range(len(row)):
-                gem_dict[row[i]] = gem_dict.get(row[i], 0) + 1
+                if row[i] == '#':
+                    gem_count += 1
+
+                # if we find a obstacle, the stones encountered till now will be above it
                 if row[i] == '*': # if we encounter a obstacle
                     new_row[i] = '*' # obstacles place will be unchanged
-                    gem_dict['*'] = 0
                     j = i - 1
-                    while gem_dict.get('#', 0):
+                    while gem_count >= 1:
                         new_row[j] = '#'
-                        gem_dict['#'] -= 1
+                        gem_count -= 1
                         j -= 1
                 # to handle, when there are no obstables scenario
-                if i == len(row)-1 and gem_dict.get('#', 0) >= 1:
+                if i == len(row)-1 and gem_count >= 1:
                     j = i
-                    while gem_dict['#']:
+                    while gem_count >= 1:
                         new_row[j] = '#'
-                        gem_dict['#'] -= 1
+                        gem_count -= 1
                         j -= 1
-            gem_dict = dict()
+
+            gem_count = 0
             new_box.append(new_row)
         
         # construct the skeleton of the result matrix, no row of rows become column, no of columns become rows
